@@ -1,0 +1,23 @@
+package com.derrick.cursojava.aula19.labs;
+
+import java.util.Scanner;
+
+public class exer11 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int par = 0;
+		double[]A = new double[10];
+		for (int i = 0; i < A.length; i++) {
+			System.out.println("Digite um valor: ");
+			A[i] = sc.nextDouble();
+			if (A[i] % 2 == 0) {
+				par++;
+			}
+		}
+		System.out.println("Qtd de elementos pares: " + par);
+
+	}
+
+}
