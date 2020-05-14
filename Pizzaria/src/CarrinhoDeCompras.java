@@ -8,12 +8,13 @@ public class CarrinhoDeCompras {
 		this.valorTotal = 0;
 	}
 
-	public void adicionarPizzas(Pizza a) {
+	public boolean adicionarPizzas(Pizza a) {
+		boolean adicionado = false;
 		if(a.qtdIngredientes != 0){
             pizzas.add(a);
-        } else {
-            System.out.println("Selecione os ingredientes da Pizza para adicionar no Carrinho");
-    	}
+            adicionado = true;
+        }
+		return adicionado;
 	}
 
 	public int valorTotalPizzas() {

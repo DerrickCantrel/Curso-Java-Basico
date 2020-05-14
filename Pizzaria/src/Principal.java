@@ -38,5 +38,10 @@ public class Principal {
 		
 		//Ingredientes utilizados
 		Pizza.imprimirIngredientes();
+		System.out.println();
+		
+		//Método zerar Ingredientes
+		Pizza.zerarIngredientes();
+		System.out.println("Está limpo? " + Pizza.zerarIngredientes());
 	}
 }

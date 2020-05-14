@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 //TAREFA: Qual o preço da pizza?
 public class Pizza {
@@ -12,45 +13,52 @@ public class Pizza {
 	public Pizza() {
 		this.qtdIngredientes = 0;
 	}
-	
+
 	public void adicionarIngrediente(String ingr) {
 		ingrediente.add(ingr);
 		contabilizarIngredientes(ingr);
 		getQtdIngredientes();
 	}
-	
+
 	public int getQtdIngredientes() {
 		return this.qtdIngredientes++;
 	}
-	
+
 	public int getPreco() {
 		if(this.qtdIngredientes <= 2){
-            this.preco = 15;
-        } else if(this.qtdIngredientes <= 5){
-            this.preco = 20;
-        } else this.preco = 23;
+			this.preco = 15;
+		} else if(this.qtdIngredientes <= 5){
+			this.preco = 20;
+		} else this.preco = 23;
 
-        return this.preco;
-    }
-	
+		return this.preco;
+	}
+
 	public static void contabilizarIngredientes(String ingr) {
 		boolean existe = false;
-        for(String key : ingredientes.keySet()){
-            if(key.equals(ingr)){
-                existe = true;
-                int novoTotal = ingredientes.get(ingr) + 1;
-                ingredientes.put(ingr, novoTotal);
-                break;
-            }
-        }
+		for(String key : ingredientes.keySet()){
+			if(key.equals(ingr)){
+				existe = true;
+				int novoTotal = ingredientes.get(ingr) + 1;
+				ingredientes.put(ingr, novoTotal);
+				break;
+			}
+		}
 
-        if(!existe) ingredientes.put(ingr, 1);
+		if(!existe) ingredientes.put(ingr, 1);
 	}
-	
+
 	public static void imprimirIngredientes() {
 		for(String key : ingredientes.keySet()){
-            System.out.println(key + " : " + ingredientes.get(key));
-        }
+			System.out.println(key + " : " + ingredientes.get(key));
+		}
 	}
-	
+
+	public static int zerarIngredientes() {
+		if (ingredientes.size() != 0) {
+			ingredientes.clear();
+		}
+		return ingredientes.size();
+	}
+
 }
