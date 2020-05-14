@@ -2,25 +2,14 @@
 public class Principal {
 
 	public static void main(String[] args) {
-		Carro c1 = new Carro();
-		c1.potencia = 10;
-		c1.nome = "Corolla";
-		c1.velocidade = 0;
 
-		c1.acelerar();
-		c1.acelerar();
-		c1.frear();
-		c1.imprimir();
+		Corrida corridaDaAmizade = new Corrida(2000);
+		corridaDaAmizade.adicionaCarro(new CarroSoma("Corolla", 10, 110));
+		corridaDaAmizade.adicionaCarro(new CarroSoma("Civic", 8, 140));
+		corridaDaAmizade.adicionaCarro(new CarroMulti("Camaro", 1.7, 100));
+		corridaDaAmizade.adicionaCarro(new CarroMulti("Mustang", 1.4, 120));
+		corridaDaAmizade.umDoisTresEJa();
 
-		Carro c2 = new Carro();
-		c2.potencia = 20;
-		c2.nome = "Civic";
-		c2.velocidade = 0;
-
-		c2.acelerar();
-		c2.acelerar();
-		c2.frear();
-		c2.imprimir();
 	}
 
 }

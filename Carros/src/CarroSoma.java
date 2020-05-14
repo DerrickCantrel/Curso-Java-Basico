@@ -1,22 +1,18 @@
 
-public class Carro {
-	int potencia;
-	int velocidade;
-	String nome;
+public class CarroSoma extends CarroDeCorrida {
 	
-	void acelerar() {
+	private int potencia;
+	
+	public CarroSoma(String nome, int potencia, int velocidadeMaxima) {
+		super(nome, velocidadeMaxima);
+		this.potencia = potencia;
+
+	}
+	
+	@Override
+	public void acelerar() {
 		velocidade += potencia;
-	}
-	
-	void frear() {
-		velocidade = velocidade/2;
-	}
-	
-	int getVelocidade() {
-		return velocidade;
-	}
-	
-	void imprimir() {
-		System.out.println("O Carrro " + nome + " Está a velocidade: " + getVelocidade() + " km/h");
+		if (velocidade > velocidadeMaxima)
+			velocidade = velocidadeMaxima;
 	}
 }
