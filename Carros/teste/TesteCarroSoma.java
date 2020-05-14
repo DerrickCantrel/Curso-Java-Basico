@@ -1,41 +1,50 @@
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
-class TesteCarro {
-
-	@Test
-	void testCarroParado() {
-		Carro c = new Carro();
-		assertEquals(0, c.velocidade);
+public class TesteCarroSoma {
+	
+	CarroDeCorrida c;
+	
+	@Before
+	public void inicializaCarro() {
+		c = new CarroSoma("Teste", 10, 100);	
 	}
 	
 	@Test
-	void testAcelerar() {
-		Carro c = new Carro();
-		c.potencia = 10;
-		c.acelerar();
-		assertEquals(10, c.velocidade);
-	}
-
-	@Test
-	void testFrear() {
-		Carro c = new Carro();
-		c.potencia = 10;
-		c.acelerar();
-		c.frear();
-		assertEquals(5, c.velocidade);
+	public void testCarroParado() {
+		assertEquals(0, c.getVelocidade());
 	}
 	
 	@Test
-	void testFrearAteZero() {
-		Carro c = new Carro();
-		c.potencia = 10;
+	public void testAcelerar() {
+		c.acelerar();
+		assertEquals(10, c.getVelocidade());
+	}
+
+	@Test
+	public void testFrear() {
+		c.acelerar();
+		c.frear();
+		assertEquals(5, c.getVelocidade());
+	}
+	
+	@Test
+	public void testFrearAteZero() {
 		c.acelerar();
 		c.frear();
 		c.frear();
 		c.frear();
 		c.frear();
-		assertEquals(0, c.velocidade);
+		assertEquals(0, c.getVelocidade());
+	}
+	
+	@Test
+	public void testAcelerarAteVelocidadeMaxima() {
+		for(int i = 0; i < 14; i++) {
+			c.acelerar();
+		}
+		assertEquals(100, c.getVelocidade());
 	}
 }
