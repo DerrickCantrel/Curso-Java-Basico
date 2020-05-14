@@ -12,7 +12,7 @@ public class Arvore {
 	}
 	
 	//Montando á arvore
-	public static void montarArvore(Arvore novo, Arvore arvore) {
+	public static void InserirNo(Arvore novo, Arvore arvore) {
 		if(arvore == null) {
 			arvore = novo;
 		} else {
@@ -22,14 +22,14 @@ public class Arvore {
 				if (arvore.noEsquerdo == null) {
 					arvore.noEsquerdo = novo;
 				} else {
-					montarArvore(novo, arvore.noEsquerdo);
+					InserirNo(novo, arvore.noEsquerdo);
 				}
 				
 			} else { 
 					if (arvore.noDireito == null) {
 						arvore.noDireito = novo;
 					} else {
-						montarArvore(novo, arvore.noDireito);
+						InserirNo(novo, arvore.noDireito);
 					}
 			}
 			
