@@ -5,20 +5,27 @@ public class FabricaEmbaralhadores implements Embaralhador{
 	private char letras[];
 	private Random random;
 	private String palavraInvertida;
-	
-	public FabricaEmbaralhadores() {
-		random = new Random();
-		palavraInvertida = "";
-	}
+
 	
 	public String getPalavraInvertida() {
 		return palavraInvertida;
 	}
+	
+	public void setPalavraInvertida(String palavraInvertida) {
+		this.palavraInvertida = palavraInvertida;
+	}
+
+	public FabricaEmbaralhadores() {
+		random = new Random();
+		palavraInvertida = "";
+	}
+
 
 	@Override
 	public void sort1(String palavra) {
 		boolean invertido = false;
 		int numSort;
+		String letrasConcat = "";
 		ArrayList<Integer> numeros = new ArrayList(palavra.length());
 		
 		while (!invertido) {
@@ -44,26 +51,41 @@ public class FabricaEmbaralhadores implements Embaralhador{
 		}
 		//chama o vetor de letras com numero randomico sem repetir
 		for (Integer numero : numeros) {
-			palavraInvertida += letras[numero] +  "";
+			 letrasConcat += letras[numero] +  ""; //alterar
 		}
-		System.out.println(palavraInvertida);
+		setPalavraInvertida(letrasConcat);
+		//System.out.println(palavraInvertida);
 	}
 
 	//Falta Implementar
 	@Override
-	public String sort2(String palavra) {
-		// TODO Auto-generated method stub
-		return null;
+	public void sort2(String palavra) {
+		// Determia as letras que poderão estar presente nas chaves
+		String letras = palavra;
+		 
+		Random random = new Random();
+		 
+		String armazenaChaves = "";
+		int index = -1;
+		for( int i = 0; i < 9; i++ ) {
+		   index = random.nextInt( letras.length() );
+		   armazenaChaves += letras.substring( index, index + 1 );
+		}
+		setPalavraInvertida(armazenaChaves);
 	}
 
-	public void palavraDividida(String palavra) {
+	public void palavraDividida(String palavra, int modo) {
 		final int TAMANHO = palavra.length();
 		letras = new char[TAMANHO];
 		
 		for ( int i=0; i<TAMANHO; i++ )
 			letras[i] = palavra.charAt(i);
 		
-		sort1(palavra);
+		if (modo == 1) {
+			sort2(palavra);
+		} else if (modo == 2) {
+			sort1(palavra);
+		}
 		//unirCarecteres();
 	}
 	
