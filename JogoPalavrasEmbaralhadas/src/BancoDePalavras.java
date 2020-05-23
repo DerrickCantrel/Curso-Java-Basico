@@ -6,7 +6,19 @@ import java.util.Random;
 public class BancoDePalavras{
 	private Embaralhador sortido;
 	private String palavraSort[] = new String[21];
+	private String palavraAtual;
+
 	
+	public String getPalavraAtual() {
+		return palavraAtual;
+	}
+
+	public void setPalavraAtual(String palavraAtual) {
+		this.palavraAtual = palavraAtual;
+	}
+
+
+
 	public BancoDePalavras() {}
 	
 	public void leitorPalavras(String caminho) throws IOException {
@@ -31,6 +43,8 @@ public class BancoDePalavras{
 		
 		//fb.palavraDividida(palavraSort[sort]); modo antingo
 		//this.sortido.sort1((palavraSort[sort]));
+		setPalavraAtual(palavraSort[sort]);
+		
 		return palavraSort[sort];
 	}
 }
