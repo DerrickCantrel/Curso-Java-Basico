@@ -4,20 +4,19 @@ import java.util.Random;
 public class FabricaEmbaralhadores implements Embaralhador{
 	private char letras[];
 	private Random random;
-	private String palavraInvertida;
+	private String palavraInv;
 
-	
-	public String getPalavraInvertida() {
-		return palavraInvertida;
-	}
-	
-	public void setPalavraInvertida(String palavraInvertida) {
-		this.palavraInvertida = palavraInvertida;
-	}
 
 	public FabricaEmbaralhadores() {
 		random = new Random();
-		palavraInvertida = "";
+	}
+
+	public String getPalavraInv() {
+		return palavraInv;
+	}
+
+	public void setPalavraInv(String palavraInv) {
+		this.palavraInv = palavraInv;
 	}
 
 
@@ -25,8 +24,8 @@ public class FabricaEmbaralhadores implements Embaralhador{
 	public void sort1(String palavra) {
 		boolean invertido = false;
 		int numSort;
-		String letrasConcat = "";
-		ArrayList<Integer> numeros = new ArrayList(palavra.length());
+		String palavraInversa = "";
+		ArrayList<Integer> numeros = new ArrayList<Integer>(palavra.length());
 		
 		while (!invertido) {
 			//numeros randomicos entre 0 e o tamanho da palavra
@@ -51,29 +50,25 @@ public class FabricaEmbaralhadores implements Embaralhador{
 		}
 		//chama o vetor de letras com numero randomico sem repetir
 		for (Integer numero : numeros) {
-			 letrasConcat += letras[numero] +  ""; //alterar
+			palavraInversa += letras[numero] +  "";
 		}
-		setPalavraInvertida(letrasConcat);
-		//System.out.println(palavraInvertida);
+		setPalavraInv(palavraInversa);
 	}
-
-	//Falta Implementar
+	
 	@Override
 	public void sort2(String palavra) {
-		// Determia as letras que poderão estar presente nas chaves
-		String letras = palavra;
-		 
-		Random random = new Random();
-		 
-		String armazenaChaves = "";
-		int index = -1;
-		for( int i = 0; i < 9; i++ ) {
-		   index = random.nextInt( letras.length() );
-		   armazenaChaves += letras.substring( index, index + 1 );
+		String palavraInversa = "";
+		int aux = palavra.length() -1;
+		
+		for (int i = 0; i < palavra.length(); i++) {
+			palavraInversa += letras[aux] + "";
+			aux--;
 		}
-		setPalavraInvertida(armazenaChaves);
+		
+		setPalavraInv(palavraInversa);
 	}
 
+	@Override
 	public void palavraDividida(String palavra, int modo) {
 		final int TAMANHO = palavra.length();
 		letras = new char[TAMANHO];
@@ -83,10 +78,16 @@ public class FabricaEmbaralhadores implements Embaralhador{
 		
 		if (modo == 1) {
 			sort2(palavra);
-		} else if (modo == 2) {
+		} else {
 			sort1(palavra);
 		}
 		//unirCarecteres();
+	}
+
+	@Override
+	public String palavraInvertida() {
+		
+		return getPalavraInv();
 	}
 	
 	/*

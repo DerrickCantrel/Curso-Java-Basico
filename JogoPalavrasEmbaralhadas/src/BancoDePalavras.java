@@ -1,14 +1,16 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class BancoDePalavras{
-	private Embaralhador sortido;
-	private String palavraSort[] = new String[21];
+	private ArrayList<String> palavraSort = new ArrayList<String>();
+	private String sorteadas[] = new String[21];
 	private String palavraAtual;
+	public int limite;
 
-	
+
 	public String getPalavraAtual() {
 		return palavraAtual;
 	}
@@ -17,34 +19,58 @@ public class BancoDePalavras{
 		this.palavraAtual = palavraAtual;
 	}
 
+	public int getLimite() {
+		return limite;
+	}
 
+	public void setLimite(int limite) {
+		this.limite = limite;
+	}
 
-	public BancoDePalavras() {}
-	
+	public int getPalavraSort() {
+		return palavraSort.size();
+	}
+
+	public BancoDePalavras() {
+		this.limite = 0;
+	}
+
 	public void leitorPalavras(String caminho) throws IOException {
 		BufferedReader buffRead = new BufferedReader(new FileReader(caminho));
 		String linha;
-		int i = 0;
 		while (true) {
 			linha = buffRead.readLine();
-			palavraSort[i] = linha;
+			palavraSort.add(linha);
 			if (linha == null) {
 				break;
 			}
-			i++;
 		}
 		buffRead.close();
 	}
-	
+
+	public void embaralharPalavras() {
+		Collections.shuffle(palavraSort);
+
+		for (int i=0; i<palavraSort.size(); i++) {
+			sorteadas[i] = palavraSort.get(i);
+		}
+	}
+
 	public String sortearPalavra() {
-		Random numSort = new Random();
-		int sort = numSort.nextInt(20) + 0;		
-		//System.out.println(palavraSort[sort]);
-		
-		//fb.palavraDividida(palavraSort[sort]); modo antingo
-		//this.sortido.sort1((palavraSort[sort]));
-		setPalavraAtual(palavraSort[sort]);
-		
-		return palavraSort[sort];
+		String palavra;
+
+		if (getLimite() == 0) {
+			palavra = sorteadas[getLimite()];
+			setPalavraAtual(palavra);
+			setLimite(getLimite() + 1);
+
+			return palavra;
+		} else {
+			palavra = sorteadas[getLimite()];
+			setPalavraAtual(palavra);
+			setLimite(getLimite() + 1);
+
+			return palavra;
+		}
 	}
 }

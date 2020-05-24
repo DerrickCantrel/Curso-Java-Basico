@@ -5,7 +5,7 @@ public class FabricaMecanicaDoJogo implements MecanicaDoJogo {
 	private int chances;
 	private int pontos;
 	private int modo;
-	FabricaEmbaralhadores fb;
+	Embaralhador fb;
 	BancoDePalavras bp;
 	
 	public FabricaMecanicaDoJogo() {
@@ -21,10 +21,6 @@ public class FabricaMecanicaDoJogo implements MecanicaDoJogo {
 	public void setPontos(int pontos) {
 		this.pontos = pontos;
 	}
-	
-	public int getChances() {
-		return chances;
-	}
 
 	public void setChances(int chances) {
 		this.chances = chances;
@@ -37,8 +33,9 @@ public class FabricaMecanicaDoJogo implements MecanicaDoJogo {
 	public void setModo(int modo) {
 		this.modo = modo;
 	}
-
-	public void iniciaJogo() {
+	
+	@Override
+	public void iniciarJogo() {
 		//Lendo as palavras de um arquivo.
 		String caminho = "/Users/Derrick/eclipse-workspace/JogoPalavrasEmbaralhadas/palavra/palavras.txt";
 		try {
@@ -46,28 +43,34 @@ public class FabricaMecanicaDoJogo implements MecanicaDoJogo {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//Palavra sorteada normal
+		
+		bp.embaralharPalavras();
+		jogar();
+	}
+	
+	public void jogar() {
 		String aux = bp.sortearPalavra();
 		//Método que irá dividir e chamar o embaralhador
 		fb.palavraDividida(aux, getModo());
-		System.out.println("A palavra embaralhada é: " + fb.getPalavraInvertida());
+		System.out.println("A palavra embaralhada é: " + fb.palavraInvertida());
 	}
 	
+	@Override
 	public void acertou(String resposta) {
 		if (resposta.equalsIgnoreCase(bp.getPalavraAtual())) {
 			System.out.println("Parabéns você acertou!!! ");
 			System.out.println();
-			setPontos(getPontos() + 1);
+			setPontos(pontos());
 			System.out.println("Vamos para a próxima palavra");
 			novaPalavra();
 		} else {
-			setChances(getChances() - 1);
-			if (getChances() == 0) {
+			setChances(chances() - 1);
+			if (chances() == 0) {
 				System.out.println("Fim de Jogo sua pontuação foi: " + getPontos());
 				System.out.println();
 				fimDeJogo();
 			} else {
-				System.out.println("Você ainda tem " + getChances() + " chances.");
+				System.out.println("Você ainda tem " + chances() + " chances.");
 			}
 		}
 	}
@@ -77,8 +80,20 @@ public class FabricaMecanicaDoJogo implements MecanicaDoJogo {
 		String aux = bp.sortearPalavra();
 		//Método que irá dividir e chamar o embaralhador
 		fb.palavraDividida(aux, getModo());
-		System.out.println("A Nova palavra embaralhada é: " + fb.getPalavraInvertida());
+		System.out.println("A Nova palavra embaralhada é: " + fb.palavraInvertida());
 	}
+	
+	@Override
+	public int chances() {
+		
+		return this.chances;
+	}
+
+	@Override
+	public int pontos() {
+		
+		return getPontos() +1;
+	}	
 	
 	//Acertou quantas palavras
 	@Override
@@ -88,13 +103,13 @@ public class FabricaMecanicaDoJogo implements MecanicaDoJogo {
 
 	@Override
 	public void modoDificil() {
-		iniciaJogo();
+		setModo(2);
+		iniciarJogo();
 	}
 
 	@Override
 	public void modoNormal() {
-		iniciaJogo();
+		setModo(1);
+		iniciarJogo();
 	}
-
-	
 }

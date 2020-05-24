@@ -1,30 +1,16 @@
 import java.io.IOException;
 import java.util.Scanner;
 
-
+//Autor: Derrick Cantrel
+//Vídeo: https://youtu.be/pIoiFbeUWjE
 public class Principal {
 
 	public static void main(String[] args) throws IOException {
-		//Embaralhador s1 = new FabricaEmbaralhadores();
-		//FabricaEmbaralhadores fb = new FabricaEmbaralhadores();
-		//BancoDePalavras bp = new BancoDePalavras();
-		
-		//Lendo as palavras de um arquivo.
-		//String caminho = "/Users/Derrick/eclipse-workspace/JogoPalavrasEmbaralhadas/palavra/palavras.txt";
-		//bp.leitorPalavras(caminho);
-		
-		/*
-		System.out.println();
-		for(String bp : BancoDePalavras.palavraSort) {
-			System.out.println(bp);
-		}
-		*/
-		
-		//bp.sortearPalavra(fb);
 		
 		Scanner scan = new Scanner(System.in);
 		String resposta = "";
-		FabricaMecanicaDoJogo fmb = new FabricaMecanicaDoJogo();
+		MecanicaDoJogo mj = new FabricaMecanicaDoJogo();
+		//FabricaMecanicaDoJogo fmb = new FabricaMecanicaDoJogo();
 		
 		int opcao = 0;
 		while (opcao != 2) {
@@ -47,19 +33,22 @@ public class Principal {
 				System.out.println("|============================================|");
 				int modo = scan.nextInt();
 				if (modo == 1) {
-					fmb.modoNormal();
-					fmb.setModo(1);
+					mj.modoNormal();
 				} else {
-					fmb.modoDificil();
-					fmb.setModo(2);
+					mj.modoDificil();
 				}
 			}
 			
-			while (fmb.getChances() != 0) {
+			while (mj.chances() != 0 || mj.pontos() == 20) {
 				System.out.println("Organize a palavra para ganhar 01 ponto.");
 				resposta = scan.next();
 				
-				fmb.acertou(resposta);
+				mj.acertou(resposta);
+				opcao = 2;
+			}
+			
+			if (mj.pontos() == 20) {
+				System.out.println("Parabéns você acertou todas as Palavras!!!");
 			}
 		}
 		System.out.println("Saindo..");
